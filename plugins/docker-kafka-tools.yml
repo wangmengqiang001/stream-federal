@@ -1,0 +1,38 @@
+version: "3.2"
+services:
+  kafka-manager:
+    hostname: kafka-manager
+    image: sheepkiller/kafka-manager            # 如果要安装web管理工具可以同时安装这个，最后通过苏主机IP的9000端口进行访问，例如172.31.148.174:9000
+    networks:
+      - zookeeper-kafka-net
+    environment:
+      ZK_HOSTS: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+      APPLICATION_SECRET: "letmein"
+    ports:
+      - 9005:9000
+    depends_on:
+      - kafka
+      - kafka1
+#    deploy:
+#      placement:
+#        constraints:
+#          - node.hostname == manager    
+
+  kafka-ui:
+    hostname: kafka-ui
+    image: provectuslabs/kafka-ui
+    networks:
+      - zookeeper-kafka-net
+    ports:
+      - 8077:8080
+    depends_on:
+      - kafka
+      - kafka1
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=cluster_0
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9094,kafka1:9095
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+
+networks:
+  zookeeper-kafka-net:
+    external: true
