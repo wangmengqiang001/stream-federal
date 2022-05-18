@@ -1,0 +1,35 @@
+version: "3.2"
+services:
+  jobmanager:
+    image: flink:1.11.2 #latest
+    networks:
+      - zookeeper-kafka-net
+    ports:
+      - 18081:8081
+    depends_on:
+      - kafka
+      - kafka1
+    command: jobmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager        
+
+  taskmanager:
+    image: flink:1.11.2 #latest
+    networks:
+      - zookeeper-kafka-net
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    deploy:
+      replicas: 2
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 5  
+
+networks:
+  zookeeper-kafka-net:
+    external: true
