@@ -5,6 +5,7 @@
 - deploy zookeeper, kafka, flink cluster
 - deploy web-ui utilities for kafka
 - undeploy all 
+- deploy by docker-compose
 
 ## create network
 ````
@@ -43,4 +44,17 @@ Removing service a_zookeeper2
 Removing service a_zookeeper3
 Removing service b_kafka-manager
 Removing service b_kafka-ui
+````
+
+## deploy or undeploy by docker-compose
+````console
+# create the network
+> docker create network zookeeper-kafka-net
+
+# deploy as project a
+> docker-compose -p a -f docker-compose.yml -f docker-kafka-tools.yml up -d
+
+# undeploy project a
+> docker-compose -p a -f docker-compose.yml -f docker-kafka-tools.yml down
+
 ````
