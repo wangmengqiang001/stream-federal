@@ -48,13 +48,14 @@ Removing service b_kafka-ui
 
 ## deploy or undeploy by docker-compose
 ````console
-# create the network
+
 > docker create network zookeeper-kafka-net
+# create the network
 
-# deploy as project a
 > docker-compose -p a -f docker-compose.yml -f docker-kafka-tools.yml up -d
+# deploy as project a
 
-# undeploy project a
+
 > docker-compose -p a -f docker-compose.yml -f docker-kafka-tools.yml down
-
+# undeploy project a
 ````
