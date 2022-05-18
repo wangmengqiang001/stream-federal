@@ -19,7 +19,7 @@ docker stack up a -c docker-zk.yml
 ## deploy all in one
 It includes 3 zookeeper nodes, 2 kafka nodes, 1+2 flink node, and two web utilities for Kafka: kafka-ui, kafka manager utilities.
 - docker-compose
-````
+````console
 # run by default name and yml file
 docker-compose up
 
