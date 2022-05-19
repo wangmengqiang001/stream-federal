@@ -49,17 +49,12 @@ services:
       - zookeeper1
       - zookeeper2
       - zookeeper3
-    ports:
-      - 9094:9094
 
     environment:
       TZ: "Asia/Shanghai" 
       KAFKA_ZOOKEEPER_CONNECT: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
-      KAFKA_ADVERTISED_HOST_NAME: 192.168.0.21
+      KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_PORT: 9094
-#      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://192.168.0.21.166:9094
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-#      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
 
   kafka1:
     hostname: kafka1
@@ -70,12 +65,10 @@ services:
       - zookeeper1
       - zookeeper2
       - zookeeper3
-    ports:
-      - 9095:9095
     environment:
       TZ: "Asia/Shanghai"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
-      KAFKA_ADVERTISED_HOST_NAME: 192.168.0.21 
+      KAFKA_ADVERTISED_HOST_NAME: kafka1
       KAFKA_PORT: 9095
 
 #  kafka2:
